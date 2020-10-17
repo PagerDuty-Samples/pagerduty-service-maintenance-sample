@@ -23,4 +23,4 @@ A list of the actions you take while using the sample will appear below the list
 ![PagerDuty Service Maintenance Action Log and Disconnect Button](img/list-actions.png)
 
 ## Questions
-If you have any questions or issues with this sample please post an Issue on this repository or create a post in the [PagerDuty Developer Community](https://community.pagerduty.com/c/dev/7).
+If you have any questions or issues with this sample please post an Issue on this repository or create a post in the [PagerDuty Developer Community](https://community.pagerduty.com/c/dev/?utm_source=web&utm_campaign=dev_top_nav&utm_medium=a).
