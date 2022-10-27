@@ -4,13 +4,12 @@ let PDJS = {};
 if (urlParams.get('code')) {
     // post to /token to request token
     let requestTokenUrl = 'https://app.pagerduty.com/oauth/token';
-    let params = {
-        grant_type: 'authorization_code',
-        code: urlParams.get('code'),
-        redirect_uri: APP_CONFIG.redirectUrl,
-        client_id: APP_CONFIG.clientId,
-        code_verifier: sessionStorage.getItem('code_verifier')
-    };
+    let params = `grant_type=authorization_code&` +
+        `code=${urlParams.get('code')}&` +
+        `redirect_uri=${APP_CONFIG.redirectUrl}&` +
+        `client_id=${APP_CONFIG.clientId}&` +
+        `code_verifier=${sessionStorage.getItem('code_verifier')}`;
+
     postData(requestTokenUrl, params)
         .then(data => {
             if (data.access_token) {
@@ -28,9 +27,13 @@ if (urlParams.get('code')) {
 
     function postData(url, data) {
         return fetch(url, {
-            method: 'POST'
-        })
-        .then(response => response.json()); // parses JSON response into native JavaScript objects 
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            })
+            .then(response => response.json()); // parses JSON response into native JavaScript objects 
     }
 } else {
     function gen128x8bitNonce() {
@@ -93,32 +96,32 @@ if (urlParams.get('code')) {
                 sB64Enc :
                 sB64Enc.substring(0, sB64Enc.length - eqLen) + (eqLen === 1 ? "=" : "==");
         };
-        let encodedArr =  base64EncArr(new Uint8Array(buffer));
+        let encodedArr = base64EncArr(new Uint8Array(buffer));
         // manually finishing up the url encoding fo the encodedArr
         encodedArr = encodedArr.replace(/\+/g, '-')
-                    .replace(/\//g, '_')
-                    .replace(/=/g, '');
+            .replace(/\//g, '_')
+            .replace(/=/g, '');
         return encodedArr;
     }
-    
+
     async function auth() {
         // generate code verifier
         const generatedCode = gen128x8bitNonce();
         // base64 encode code_verifier
-        const codeVerifier = base64Unicode(generatedCode.buffer);        
+        const codeVerifier = base64Unicode(generatedCode.buffer);
         // save code_verifier
         sessionStorage.setItem('code_verifier', codeVerifier);
         // generate the challenge from the code verifier
-        const challengeBuffer =  await digestVerifier(codeVerifier);
+        const challengeBuffer = await digestVerifier(codeVerifier);
         // base64 encode the challenge
-        const challenge = base64Unicode(challengeBuffer);        
+        const challenge = base64Unicode(challengeBuffer);
         // build authUrl
         const authUrl = `https://app.pagerduty.com/oauth/authorize?` +
-                            `client_id=${APP_CONFIG.clientId}&` +
-                            `redirect_uri=${APP_CONFIG.redirectUrl}&` + 
-                            `response_type=code&` +
-                            `code_challenge=${encodeURI(challenge)}&` + 
-                            `code_challenge_method=S256`;
+            `client_id=${APP_CONFIG.clientId}&` +
+            `redirect_uri=${APP_CONFIG.redirectUrl}&` +
+            `response_type=code&` +
+            `code_challenge=${encodeURI(challenge)}&` +
+            `code_challenge_method=S256`;
 
         document.getElementById("pd-login-button").href = authUrl;
     }
