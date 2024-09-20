@@ -2,7 +2,7 @@
 
 This is a simple tool that showcases how to use [PKCE OAuth](https://v2.developer.pagerduty.com/docs/oauth-2-functionality-pkce) and the [PDJS](https://github.com/PagerDuty/pdjs) library to enable and disable services in [PagerDuty](https://www.pagerduty.com/).
 
-A detailed explanation of the PKCE OAuth code can be found in the [pagerduty-bulk-user-mgr-sample](https://github.com/PagerDuty/pagerduty-bulk-user-mgr-sample#pkce-oauth-sample) project. Questions about the code in this project can either be posted as an Issue in GitHub, or on the [Developer Forum](https://community.pagerduty.com/c/dev/7) on the [PagerDuty Community](https://community.pagerduty.com/) site.
+A detailed explanation of the PKCE OAuth code can be found in the [pagerduty-bulk-user-mgr-sample](https://github.com/PagerDuty/pagerduty-bulk-user-mgr-sample#pkce-oauth-sample) project. Questions about the code in this project can either be posted as an Issue in GitHub, or as a post on the [PagerDuty Community](https://community.pagerduty.com/) site.
 
 ## Set Up Instructions
 To run this code, do the following:
@@ -23,4 +23,4 @@ A list of the actions you take while using the sample will appear below the list
 ![PagerDuty Service Maintenance Action Log and Disconnect Button](img/list-actions.png)
 
 ## Questions
-If you have any questions or issues with this sample please post an Issue on this repository or create a post in the [PagerDuty Developer Community](https://community.pagerduty.com/c/dev/?utm_source=web&utm_campaign=dev_top_nav&utm_medium=a).
+If you have any questions or issues with this sample please post an Issue on this repository or create a post in the [PagerDuty Developer Community](https://community.pagerduty.com/).
